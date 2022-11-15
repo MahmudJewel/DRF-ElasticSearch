@@ -37,7 +37,44 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # installed apps 
+    'book',
+
+    # third party apps 
+    # REST framework
+    'rest_framework',
+    # Django Elasticsearch integration
+    'django_elasticsearch_dsl',
+    # Django REST framework Elasticsearch integration (this package)
+    'django_elasticsearch_dsl_drf',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
+    'ORDERING_PARAM': 'ordering',
+}
+
+# Elasticsearch configuration
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
+
+
+# Name of the Elasticsearch index
+# ELASTICSEARCH_INDEX_NAMES = {
+#     # book and publisher are Elasticsearch index names.
+#     'book.documents.book': 'book',
+#     'book.documents.publisher': 'publisher',
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
