@@ -28,49 +28,83 @@ class BookDocument(Document):
     """Book Elasticsearch document."""
 
     id = fields.IntegerField(attr='id')
-
+    fielddata = True
     title = fields.TextField(
-        analyzer=html_strip,
+        # analyzer=html_strip,
         fields={
             'raw': fields.TextField(analyzer='keyword'),
         }
     )
 
     description = fields.TextField(
-        analyzer=html_strip,
+        # analyzer=html_strip,
         fields={
-            'raw': fields.TextField(analyzer='keyword'),
+            'raw':{
+                'type': 'keyword',
+            }
+            
         }
+
+        # fields={
+        #     'raw': fields.TextField(analyzer='keyword'),
+        # }
     )
 
     summary = fields.TextField(
-        analyzer=html_strip,
+        # analyzer=html_strip,
+        # fields={
+        #     'raw': fields.TextField(analyzer='keyword'),
+        # }
         fields={
-            'raw': fields.TextField(analyzer='keyword'),
+            'raw':{
+                'type': 'keyword',
+            }
+            
         }
     )
 
     publisher = fields.TextField(
         attr='publisher_indexing',
-        analyzer=html_strip,
+        # analyzer=html_strip,
+        # fields={
+        #     'raw': fields.TextField(analyzer='keyword'),
+        # }
+
         fields={
-            'raw': fields.TextField(analyzer='keyword'),
+            'raw':{
+                'type': 'keyword',
+            }
+            
         }
     )
 
     publication_date = fields.DateField()
 
     state = fields.TextField(
-        analyzer=html_strip,
+        # analyzer=html_strip,
+        # fields={
+        #     'raw': fields.TextField(analyzer='keyword'),
+        # }
+
         fields={
-            'raw': fields.TextField(analyzer='keyword'),
+            'raw':{
+                'type': 'keyword',
+            }
+            
         }
     )
 
     isbn = fields.TextField(
-        analyzer=html_strip,
+        # analyzer=html_strip,
+        # fields={
+        #     'raw': fields.TextField(analyzer='keyword'),
+        # }
+
         fields={
-            'raw': fields.TextField(analyzer='keyword'),
+            'raw':{
+                'type': 'keyword',
+            }
+            
         }
     )
 
@@ -82,12 +116,19 @@ class BookDocument(Document):
 
     tags = fields.TextField(
         attr='tags_indexing',
-        analyzer=html_strip,
+        # analyzer=html_strip,
+        # fields={
+        #     'raw': fields.TextField(analyzer='keyword', multi=True),
+        #     'suggest': fields.CompletionField(multi=True),
+        # },
+        multi=True,
+
         fields={
-            'raw': fields.TextField(analyzer='keyword', multi=True),
-            'suggest': fields.CompletionField(multi=True),
-        },
-        multi=True
+            'raw':{
+                'type': 'keyword',
+            }
+            
+        }
     )
 
     class Django(object):
